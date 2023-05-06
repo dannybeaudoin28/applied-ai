@@ -1,6 +1,7 @@
 package beaudoin.appliedapi.Services;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +47,8 @@ public class PostingService {
         Posting oldPosting = postingRepo.findById(id).get();
         if(oldPosting != null) {
             oldPosting.setTitle(newPosting.getTitle());
-            oldPosting.setisChecked(newPosting.getIsChecked());
+            oldPosting.setCompany(newPosting.getCompany());
+            oldPosting.setDateApplied(new Date());
             postingRepo.save(oldPosting);
             return oldPosting;
         }

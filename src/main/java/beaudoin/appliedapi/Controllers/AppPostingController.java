@@ -2,7 +2,6 @@ package beaudoin.appliedapi.Controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,7 +27,7 @@ public class AppPostingController {
         this.postingService = postingService;
     }
 
-    @PostMapping("/addPosting")
+    @PostMapping("/postings")
     public ResponseEntity<Integer> addPosting(@RequestBody Posting posting) {
         postingService.addPost(posting);
         return new ResponseEntity<>(posting.getId(), HttpStatus.CREATED);
@@ -48,7 +47,7 @@ public class AppPostingController {
         List postings = postingService.findAllPostings();
         if(postings.size() > 0)
             return new ResponseEntity<List<Posting>>(postings, HttpStatus.OK);
-        else return new ResponseEntity<List<Posting>>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/postings/{id}")
